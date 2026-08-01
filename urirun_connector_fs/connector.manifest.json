@@ -35,6 +35,7 @@
     "github": "https://github.com/if-uri"
   },
   "routes": [
+    "fs://host/archive/command/unpack-b64",
     "fs://host/duplicates/command/move",
     "fs://host/duplicates/query/find",
     "fs://host/file/command/delete",

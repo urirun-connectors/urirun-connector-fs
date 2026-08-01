@@ -8,6 +8,7 @@ import urirun_connector_fs.core as c
 def test_bindings_valid():
     b = c.urirun_bindings()
     assert set(b["bindings"]) == {
+        "fs://host/archive/command/unpack-b64",
         "fs://host/duplicates/query/find",
         "fs://host/duplicates/command/move",
         "fs://host/file/query/read-b64",
