@@ -1,0 +1,49 @@
+{
+  "$schema": "https://wellmanifest.org/schemas/dockuri-manifest.schema.json",
+  "app": "urirun-connector-fs",
+  "version": "0.1.0",
+  "description": "Fast filesystem file reading and checksum connector with zero-cold-start UDS daemon.",
+  "transport": {
+    "type": "uds",
+    "socket": "/tmp/dockuri_fs.sock",
+    "auto_spawn": true,
+    "spawn_cmd": ["python3", "-m", "urirun_connector_fs.dockuri_worker"],
+    "fallback": "native"
+  },
+  "procedures": {
+    "fs.read_text": {
+      "description": "Read text file contents from specified filesystem path.",
+      "effect": "pure",
+      "timeout_ms": 50,
+      "shm_supported": false,
+      "schema": {
+        "input": {
+          "type": "object",
+          "properties": { "path": { "type": "string" } },
+          "required": ["path"]
+        },
+        "output": {
+          "type": "object",
+          "properties": { "content": { "type": "string" } }
+        }
+      }
+    },
+    "fs.sha256": {
+      "description": "Calculate SHA-256 digest of specified file.",
+      "effect": "pure",
+      "timeout_ms": 50,
+      "shm_supported": false,
+      "schema": {
+        "input": {
+          "type": "object",
+          "properties": { "path": { "type": "string" } },
+          "required": ["path"]
+        },
+        "output": {
+          "type": "object",
+          "properties": { "sha256": { "type": "string" } }
+        }
+      }
+    }
+  }
+}
